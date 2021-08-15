@@ -1,10 +1,6 @@
 # Api tools
 
-* [libphonenumber for PHP](https://github.com/giggsey/libphonenumber-for-php)
-* [PHP Enum](https://github.com/myclabs/php-enum)
-* [Money](https://github.com/moneyphp/money)
-
-# Что внутри?
+## Что внутри?
 
 ### TelephoneObject
 Обертка над libphonenumber + PhoneNumberType для DoctrineType. 
@@ -17,13 +13,13 @@ doctrine:
 ```
 
 ### ApiPlatform extra
-#Дополнительные сериалайзеры (Enum, TelephoneObject, Money)
+#### Дополнительные сериалайзеры (Enum, TelephoneObject, Money)
 Конфигурация: 
 ```
 $services
     ->load('Riverwaysoft\\ApiTools\\ApiPlatform\\Serializer\\', __DIR__ . '/../vendor/riverwaysoft/api-tools/src/Lib/ApiPlatform/Serializer');
 ```
-#Дополнительные фильтры (хорошо сочетаются с riveradmin ;))
+#### Дополнительные фильтры (хорошо сочетаются с riveradmin ;))
 * EnumSearchFilter
 * InputSearchFilter
 * AbstractFullTextSearchFilter
