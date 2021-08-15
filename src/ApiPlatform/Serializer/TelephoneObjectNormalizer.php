@@ -13,7 +13,7 @@ class TelephoneObjectNormalizer implements NormalizerInterface, DenormalizerInte
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
         if ('' === $data || null === $data) {
-            return TelephoneObject::fromRawInput($data);
+            return;
         }
         try {
             return TelephoneObject::fromString($data);

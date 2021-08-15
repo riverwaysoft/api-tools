@@ -30,3 +30,6 @@ jobs:
 
       - name: Run ci
         run: composer run-script ci
+
+      - name: Run tests
+        run: composer run-script tests

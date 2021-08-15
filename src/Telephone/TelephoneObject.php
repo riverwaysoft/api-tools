@@ -59,7 +59,8 @@ final class TelephoneObject implements \Stringable
             throw new ParseTelephoneException($e->getMessage(), 0, $e);
         }
     }
-    public static function fromRawInput(string $rawInput): self
+
+    public static function fromRawInput(?string $rawInput = null): self
     {
         $parsed = new PhoneNumber();
         $parsed->setRawInput($rawInput);
