@@ -10,7 +10,7 @@
     }
   ],
   "scripts": {
-    "ci": " vendor/bin/phpstan analyse src",
+    "ci": "vendor/bin/phpstan analyse src",
     "cs": "vendor/bin/php-cs-fixer fix src"
   },
   "suggest": {
