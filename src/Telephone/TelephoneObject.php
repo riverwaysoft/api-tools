@@ -1,6 +1,6 @@
 <?php
 
-namespace Riverwaysoft\ApiTools\PhoneNumber;
+namespace Riverwaysoft\ApiTools\Telephone;
 
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumber;

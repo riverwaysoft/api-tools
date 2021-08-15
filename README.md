@@ -9,7 +9,7 @@ Configuration:
 doctrine:
     dbal:
         types:
-            phone_number: Riverwaysoft\ApiTools\PhoneNumber\Doctrine\DBAL\Types\PhoneNumberType
+            phone_number: Riverwaysoft\ApiTools\Telephone\Doctrine\DBAL\Types\TelephoneObjectType
 ```
 
 ### ApiPlatform extra

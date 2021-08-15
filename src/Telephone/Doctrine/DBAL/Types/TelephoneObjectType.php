@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Riverwaysoft\ApiTools\PhoneNumber\Doctrine\DBAL\Types;
+namespace Riverwaysoft\ApiTools\Telephone\Doctrine\DBAL\Types;
 
-use Riverwaysoft\ApiTools\PhoneNumber\ParseTelephoneException;
-use Riverwaysoft\ApiTools\PhoneNumber\TelephoneObject;
+use Riverwaysoft\ApiTools\Telephone\ParseTelephoneException;
+use Riverwaysoft\ApiTools\Telephone\TelephoneObject;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
@@ -20,7 +20,7 @@ use Doctrine\DBAL\Types\Type;
 /**
  * Phone number Doctrine mapping type.
  */
-class PhoneNumberType extends Type
+class TelephoneObjectType extends Type
 {
     /**
      * Phone number type name.

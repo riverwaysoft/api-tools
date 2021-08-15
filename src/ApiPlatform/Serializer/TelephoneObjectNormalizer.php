@@ -2,13 +2,13 @@
 
 namespace Riverwaysoft\ApiTools\ApiPlatform\Serializer;
 
-use Riverwaysoft\ApiTools\PhoneNumber\ParseTelephoneException;
-use Riverwaysoft\ApiTools\PhoneNumber\TelephoneObject;
+use Riverwaysoft\ApiTools\Telephone\ParseTelephoneException;
+use Riverwaysoft\ApiTools\Telephone\TelephoneObject;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PhoneNumberNormalizer implements NormalizerInterface, DenormalizerInterface
+class TelephoneObjectNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {

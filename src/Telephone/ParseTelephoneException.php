@@ -1,6 +1,6 @@
 <?php
 
-namespace Riverwaysoft\ApiTools\PhoneNumber;
+namespace Riverwaysoft\ApiTools\Telephone;
 
 class ParseTelephoneException extends \RuntimeException
 {
