@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Lib\ApiPlatform\Filter;
-
+namespace Riverwaysoft\ApiTools\ApiPlatform\Filter;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
@@ -19,8 +17,7 @@ abstract class AbstractFullTextSearchFilter extends AbstractContextAwareFilter
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null
-    )
-    {
+    ) {
         if ($property !== 'fullText') {
             return;
         }

@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nastya
- * Date: 28.04.20
- * Time: 21:10
- */
 
 namespace Riverwaysoft\ApiTools\ApiPlatform\Serializer;
-
 
 use MyCLabs\Enum\Enum;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;

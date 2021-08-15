@@ -17,7 +17,6 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 
-
 /**
  * Phone number Doctrine mapping type.
  */
@@ -26,7 +25,7 @@ class PhoneNumberType extends Type
     /**
      * Phone number type name.
      */
-    const NAME = 'phone_number';
+    public const NAME = 'phone_number';
 
     /**
      * {@inheritdoc}

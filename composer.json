@@ -9,6 +9,14 @@
       "email": "victor@riverwaysoft.com"
     }
   ],
+  "scripts": {
+    "ci": " vendor/bin/phpstan analyse src",
+    "cs": "vendor/bin/php-cs-fixer fix src"
+  },
+  "suggest": {
+    "doctrine/orm": "^2.9",
+    "api-platform/core": "^2.6"
+  },
   "autoload": {
     "psr-4": {
       "Riverwaysoft\\ApiTools\\": "src/"
@@ -16,16 +24,17 @@
   },
   "require": {
     "php": "^8.0",
+    "ext-intl": "*",
     "giggsey/libphonenumber-for-php": "^8.11",
     "myclabs/php-enum": "^1.7",
-    "nesbot/carbon": "^2.30",
-    "doctrine/dbal": "^3.1",
-    "api-platform/core": "^2.6",
-    "symfony/serializer": "^5.3",
-    "doctrine/persistence": "^2.2",
-    "moneyphp/money": "^4.0"
+    "moneyphp/money": "^4.0",
+    "symfony/intl": "^5.3",
+    "symfony/polyfill-uuid": "^1.23"
   },
   "require-dev": {
-    "phpstan/phpstan": "0.12.91"
+    "phpstan/phpstan": "0.12.91",
+    "doctrine/orm": "^2.9",
+    "api-platform/core": "^2.6",
+    "friendsofphp/php-cs-fixer": "^3.0"
   }
 }

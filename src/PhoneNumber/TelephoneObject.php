@@ -1,20 +1,18 @@
 <?php
 
-
 namespace Riverwaysoft\ApiTools\PhoneNumber;
-
 
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 
-class TelephoneObject implements \Stringable
+final class TelephoneObject implements \Stringable
 {
-    const FORMAT_E164 = 0;
-    const FORMAT_INTERNATIONAL = 1;
-    const FORMAT_NATIONAL = 2;
-    const FORMAT_RFC3966 = 3;
-    const UNKNOWN_REGION = 'ZZ';
+    public const FORMAT_E164 = 0;
+    public const FORMAT_INTERNATIONAL = 1;
+    public const FORMAT_NATIONAL = 2;
+    public const FORMAT_RFC3966 = 3;
+    public const UNKNOWN_REGION = 'ZZ';
 
     private function __construct(private PhoneNumber $_phone)
     {
@@ -33,9 +31,8 @@ class TelephoneObject implements \Stringable
         $parsed->setNationalNumber($number);
         if (!PhoneNumberUtil::getInstance()->isValidNumber($parsed)) {
             throw new ParseTelephoneException("Not valid phone number: {$code}{$number}");
-
         }
-        return new static($parsed);
+        return new self($parsed);
     }
 
     /**
@@ -57,15 +54,16 @@ class TelephoneObject implements \Stringable
             if (!PhoneNumberUtil::getInstance()->isValidNumber($parsed)) {
                 throw new ParseTelephoneException("Not valid phone number: {$originTelephone}");
             }
-            return new static($parsed);
+            return new self($parsed);
         } catch (NumberParseException $e) {
             throw new ParseTelephoneException($e->getMessage(), 0, $e);
         }
     }
-    public static function fromRawInput(string $rawInput): self {
+    public static function fromRawInput(string $rawInput): self
+    {
         $parsed = new PhoneNumber();
         $parsed->setRawInput($rawInput);
-        return new static($parsed);
+        return new self($parsed);
     }
 
     public function getCountryCode(): ?string
