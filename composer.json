@@ -15,7 +15,8 @@
   },
   "suggest": {
     "doctrine/orm": "^2.9",
-    "api-platform/core": "^2.6"
+    "api-platform/core": "^2.6",
+    "symfony/messenger": "^5.3"
   },
   "autoload": {
     "psr-4": {
@@ -35,6 +36,7 @@
     "phpstan/phpstan": "0.12.91",
     "doctrine/orm": "^2.9",
     "api-platform/core": "^2.6",
-    "friendsofphp/php-cs-fixer": "^3.0"
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "symfony/messenger": "^5.3"
   }
 }
