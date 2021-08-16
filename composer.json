@@ -34,7 +34,7 @@
     "ext-intl": "*",
     "giggsey/libphonenumber-for-php": "^8.11",
     "myclabs/php-enum": "^1.7",
-    "moneyphp/money": "^4.0",
+    "moneyphp/money": "^3",
     "symfony/intl": "^5.3",
     "symfony/polyfill-uuid": "^1.23"
   },
