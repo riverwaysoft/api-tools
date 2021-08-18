@@ -50,15 +50,22 @@ class TelephoneNumberValidator extends ConstraintValidator
             $value = (string)$value;
 
             try {
-                TelephoneObject::fromString($value, $constraint->defaultRegion ?? $this->defaultRegion);
+               $telephoneObject = TelephoneObject::fromString($value, $constraint->defaultRegion ?? $this->defaultRegion);
             } catch (ParseTelephoneException $e) {
                 $this->addViolation($value, $constraint);
 
                 return;
             }
         } else {
+            $telephoneObject = $value;
             $phoneNumber = $value;
             $value = $phoneNumber->format();
+
+        }
+        if (!$telephoneObject->isValid()) {
+            $this->addViolation($value, $constraint);
+
+            return;
         }
         $validTypes = [];
         foreach ($constraint->getTypes() as $type) {

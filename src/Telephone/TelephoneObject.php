@@ -8,14 +8,11 @@ use libphonenumber\PhoneNumberUtil;
 
 final class TelephoneObject implements \Stringable
 {
-    public const FORMAT_E164 = 0;
-    public const FORMAT_INTERNATIONAL = 1;
-    public const FORMAT_NATIONAL = 2;
-    public const FORMAT_RFC3966 = 3;
-    public const UNKNOWN_REGION = 'ZZ';
+    private TelephoneFormatEnum $_format;
 
     private function __construct(private PhoneNumber $_phone)
     {
+        $this->_format = TelephoneFormatEnum::FORMAT_E164();
     }
 
     /**
@@ -42,18 +39,9 @@ final class TelephoneObject implements \Stringable
      */
     public static function fromString(string $originTelephone, string|null $region = null): self
     {
-        $phoneNumber = '+' . str_replace('+', '', $originTelephone);
-        if (str_starts_with($phoneNumber, '+00')) {
-            $phoneNumber = str_replace('+00', '+', $phoneNumber);
-        }
-        if (str_starts_with($phoneNumber, '+044')) {
-            $phoneNumber = str_replace('+044', '+44', $phoneNumber);
-        }
+
         try {
-            $parsed = PhoneNumberUtil::getInstance()->parse($phoneNumber, $region ?? PhoneNumberUtil::UNKNOWN_REGION);
-            if (!PhoneNumberUtil::getInstance()->isValidNumber($parsed)) {
-                throw new ParseTelephoneException("Not valid phone number: {$originTelephone}");
-            }
+            $parsed = PhoneNumberUtil::getInstance()->parse(self::cleanRaw($originTelephone), $region ?? PhoneNumberUtil::UNKNOWN_REGION);
             return new self($parsed);
         } catch (NumberParseException $e) {
             throw new ParseTelephoneException($e->getMessage(), 0, $e);
@@ -63,18 +51,37 @@ final class TelephoneObject implements \Stringable
     public static function fromRawInput(?string $rawInput = null): self
     {
         $parsed = new PhoneNumber();
-        $parsed->setRawInput($rawInput);
+        $parsed->setRawInput(self::cleanRaw($rawInput));
         return new self($parsed);
+    }
+
+    private static function cleanRaw(?string $rawInput)
+    {
+        $phoneNumber = '+' . str_replace('+', '', $rawInput);
+        if (str_starts_with($phoneNumber, '+00')) {
+            $phoneNumber = str_replace('+00', '+', $phoneNumber);
+        }
+        if (str_starts_with($phoneNumber, '+044')) {
+            $phoneNumber = str_replace('+044', '+44', $phoneNumber);
+        }
+        return $phoneNumber;
     }
 
     public function getCountryCode(): ?string
     {
         return PhoneNumberUtil::getInstance()->getRegionCodeForNumber($this->_phone);
     }
+    public function configureFormat(TelephoneFormatEnum $format){
 
-    public function format(int $format = self::FORMAT_E164): string
+    }
+    public function format(): string
     {
-        return PhoneNumberUtil::getInstance()->format($this->_phone, $format);
+        return PhoneNumberUtil::getInstance()->format($this->_phone, $this->_format->getValue());
+    }
+
+    public function isValid(): bool
+    {
+        return PhoneNumberUtil::getInstance()->isValidNumber($this->_phone);
     }
 
     public function __toString(): string

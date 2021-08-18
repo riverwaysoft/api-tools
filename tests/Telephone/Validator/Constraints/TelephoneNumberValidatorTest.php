@@ -50,9 +50,9 @@ class TelephoneNumberValidatorTest extends TestCase
         $validator = Validation::createValidatorBuilder()->getValidator();
         $res = $validator->validate($value, [$constraint]);
         if (!$violates) {
-            $this->assertEquals(0, $res->count());
+            $this->assertEquals(0, $res->count(), var_export($res, true));
         }else{
-            $this->assertEquals(1, $res->count());
+            $this->assertEquals(1, $res->count(), 'Telephone: '.$value);
         }
     }
 
@@ -67,8 +67,9 @@ class TelephoneNumberValidatorTest extends TestCase
         return [
             [null, false],
             ['', false],
-            [TelephoneObject::fromRawInput('+441234567890'), false],
-            [TelephoneObject::fromRawInput('+441234567890'), true, 'mobile'],
+            [TelephoneObject::fromString('9725832888833'), true],
+            [TelephoneObject::fromString('+441234567890'), false],
+            [TelephoneObject::fromString('+441234567890'), true, 'mobile'],
             ['+441234567890', false],
             ['+441234567890', false, 'fixed_line'],
             ['+441234567890', true, 'mobile'],

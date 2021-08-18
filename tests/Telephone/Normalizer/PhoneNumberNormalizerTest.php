@@ -68,6 +68,15 @@ class PhoneNumberNormalizerTest extends TestCase
         $this->assertEquals((string)$phoneNumber, (string)$normalizer->denormalize('+33193166989', $phoneNumber::class));
     }
 
+    public function testDenormalizeAnother()
+    {
+        $phoneNumber = TelephoneObject::fromRawInput('9725832888833');
+
+        $normalizer = new TelephoneObjectNormalizer();
+
+        $this->assertEquals('+9725832888833', $normalizer->normalize($phoneNumber));
+    }
+
     public function testItDenormalizeNullToNull()
     {
 
