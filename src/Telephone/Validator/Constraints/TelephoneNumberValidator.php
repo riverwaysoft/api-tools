@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Riverwaysoft\ApiTools\Telephone\Validator\Constraints;
 
 use libphonenumber\PhoneNumberType;
@@ -50,7 +49,7 @@ class TelephoneNumberValidator extends ConstraintValidator
             $value = (string)$value;
 
             try {
-               $telephoneObject = TelephoneObject::fromString($value, $constraint->defaultRegion ?? $this->defaultRegion);
+                $telephoneObject = TelephoneObject::fromString($value, $constraint->defaultRegion ?? $this->defaultRegion);
             } catch (ParseTelephoneException $e) {
                 $this->addViolation($value, $constraint);
 
@@ -60,7 +59,6 @@ class TelephoneNumberValidator extends ConstraintValidator
             $telephoneObject = $value;
             $phoneNumber = $value;
             $value = $phoneNumber->format();
-
         }
         if (!$telephoneObject->isValid()) {
             $this->addViolation($value, $constraint);

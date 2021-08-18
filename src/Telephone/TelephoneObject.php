@@ -39,7 +39,6 @@ final class TelephoneObject implements \Stringable
      */
     public static function fromString(string $originTelephone, string|null $region = null): self
     {
-
         try {
             $parsed = PhoneNumberUtil::getInstance()->parse(self::cleanRaw($originTelephone), $region ?? PhoneNumberUtil::UNKNOWN_REGION);
             return new self($parsed);
@@ -71,8 +70,8 @@ final class TelephoneObject implements \Stringable
     {
         return PhoneNumberUtil::getInstance()->getRegionCodeForNumber($this->_phone);
     }
-    public function configureFormat(TelephoneFormatEnum $format){
-
+    public function configureFormat(TelephoneFormatEnum $format)
+    {
     }
     public function format(): string
     {

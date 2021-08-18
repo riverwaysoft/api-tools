@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Riverwaysoft\ApiTools\DomainEvents;
-
 
 use Symfony\Component\Messenger\Stamp\StampInterface;
 
-abstract class  EventSourceCollector
+abstract class EventSourceCollector
 {
     protected array $messages = [];
 

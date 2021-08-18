@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Riverwaysoft\ApiTools\DomainEvents\Doctrine;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;

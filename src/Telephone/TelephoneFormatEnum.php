@@ -3,6 +3,7 @@
 namespace Riverwaysoft\ApiTools\Telephone;
 
 use MyCLabs\Enum\Enum;
+
 /**
  * @method static TelephoneFormatEnum FORMAT_E164()
  * @method static TelephoneFormatEnum FORMAT_INTERNATIONAL()
