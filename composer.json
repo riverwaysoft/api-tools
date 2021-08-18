@@ -45,6 +45,7 @@
     "friendsofphp/php-cs-fixer": "^3.0",
     "symfony/messenger": "^5.3",
     "symfony/validator": "^5.3",
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^9.5",
+    "spatie/phpunit-snapshot-assertions": "^4.2"
   }
 }

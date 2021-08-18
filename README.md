@@ -23,14 +23,15 @@ $services
 ```
 
 #### Extra filters (look riveradmin ;))
-* EnumSearchFilter
-* InputSearchFilter
+* RiverAdminEnumSearchFilter
+* RiverAdminSearchFilter
+* RiverAdminBooleanFilter
 * AbstractFullTextSearchFilter
 
 ### Domain Events
 
 Usage:
-```injectablephp
+```php
 class UserRegisteredMessage {
     public function __construct(public string $username) {}
 }
@@ -52,7 +53,7 @@ $messages = $user->popMessages();
 Or it can be done automatically with doctrine adapter:
 
 Configuration:
-```injectablephp
+```php
     $services->set(Riverwaysoft\ApiTools\DomainEvents\Doctrine\DoctrineDomainEventsCollector::class)->public()
         ->tag('doctrine.event_listener', ['event' => "postPersist"])
         ->tag('doctrine.event_listener', ['event' => "postUpdate"])

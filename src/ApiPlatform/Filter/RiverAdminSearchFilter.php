@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Riverwaysoft\ApiTools\ApiPlatform\Search;
+namespace Riverwaysoft\ApiTools\ApiPlatform\Filter;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
-class InputSearchFilter extends SearchFilter
+class RiverAdminSearchFilter extends SearchFilter
 {
     public function getDescription(string $resourceClass): array
     {
