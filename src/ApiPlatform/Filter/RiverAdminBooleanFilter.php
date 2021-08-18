@@ -10,10 +10,11 @@ class RiverAdminBooleanFilter extends SearchFilter
     {
         $description = parent::getDescription($resourceClass);
         $properties = $this->getProperties();
-        $property = array_key_first($properties);
 
-        if ($property && !empty($description[$property])) {
-            $description[$property]['property'] = sprintf('riveradmin_bool[%s]', $property);
+        foreach ($properties as $property => $value) {
+            if ($property && !empty($description[$property])) {
+                $description[$property]['property'] = sprintf('riveradmin_bool[%s]', $property);
+            }
         }
 
         return $description;
