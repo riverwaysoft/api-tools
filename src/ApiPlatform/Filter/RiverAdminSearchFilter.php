@@ -11,11 +11,12 @@ class RiverAdminSearchFilter extends SearchFilter
     public function getDescription(string $resourceClass): array
     {
         $description = parent::getDescription($resourceClass);
-
         $properties = $this->getProperties();
-        $property = array_key_first($properties);
-        if ($property && !empty($description[$property])) {
-            $description[$property]['property'] = sprintf('riveradmin_input:%s', $property);
+
+        foreach ($properties as $property => $value) {
+            if ($property && !empty($description[$property])) {
+                $description[$property]['property'] = sprintf('riveradmin_input:%s', $property);
+            }
         }
 
         return $description;

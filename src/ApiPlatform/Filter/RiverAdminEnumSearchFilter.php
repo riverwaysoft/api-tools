@@ -23,16 +23,12 @@ class RiverAdminEnumSearchFilter extends SearchFilter
     public function getDescription(string $resourceClass): array
     {
         $description = parent::getDescription($resourceClass);
-
         $properties = $this->getProperties();
 
-        if (count($properties) > 2) {
-            throw new \Exception('RiverAdminEnumSearchFilter - Multiple properties are not supported');
-        }
-
-        $property = array_key_first($properties);
-        if ($property && !empty($description[$property])) {
-            $description[$property]['property'] = sprintf('riveradmin_enum:%s', $this->serializeEnum($this->enum));
+        foreach ($properties as $property => $value) {
+            if ($property && !empty($description[$property])) {
+                $description[$property]['property'] = sprintf('riveradmin_enum:%s', $this->serializeEnum($this->enum));
+            }
         }
 
         return $description;
