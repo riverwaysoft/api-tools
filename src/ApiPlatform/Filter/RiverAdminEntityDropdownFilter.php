@@ -15,16 +15,18 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 /**
  * Example usage:
- * 
+ *
  * #[ApiFilter(
  *      RiverAdminEntityDropdownFilter::class,
  *      properties: ['progresses.user'],
- *      arguments: ['endpoint' => '/api/users', 'labelKey' => 'username'])
+ *      arguments: ['endpoint' => '/api/users', 'labelKey' => 'username', 'async' => false])
  * ]
+ *
+ * Use 'async' => true if you want to render component that loads options from a remote source as the user types: https://react-select.com/async
  */
 class RiverAdminEntityDropdownFilter extends SearchFilter
 {
-    public function __construct(private string $endpoint, private string $labelKey, ManagerRegistry $managerRegistry, ?RequestStack $requestStack, IriConverterInterface $iriConverter, PropertyAccessorInterface $propertyAccessor = null, LoggerInterface $logger = null, array $properties = null, IdentifiersExtractorInterface $identifiersExtractor = null, NameConverterInterface $nameConverter = null)
+    public function __construct(private string $endpoint, private string $labelKey, private bool $async = false, ManagerRegistry $managerRegistry, ?RequestStack $requestStack, IriConverterInterface $iriConverter, PropertyAccessorInterface $propertyAccessor = null, LoggerInterface $logger = null, array $properties = null, IdentifiersExtractorInterface $identifiersExtractor = null, NameConverterInterface $nameConverter = null)
     {
         parent::__construct($managerRegistry, $requestStack, $iriConverter, $propertyAccessor, $logger, $properties, $identifiersExtractor, $nameConverter);
     }
@@ -39,6 +41,7 @@ class RiverAdminEntityDropdownFilter extends SearchFilter
                 $description[$property]['property'] = sprintf('riveradmin_entity_dropdown:%s', json_encode([
                     'endpoint' => $this->endpoint,
                     'labelKey' => $this->labelKey,
+                    'async' => $this->async
                 ]));
             }
         }
