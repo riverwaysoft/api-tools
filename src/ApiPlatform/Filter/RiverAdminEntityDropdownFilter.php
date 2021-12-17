@@ -13,6 +13,15 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
+/**
+ * Example usage:
+ * 
+ * #[ApiFilter(
+ *      RiverAdminEntityDropdownFilter::class,
+ *      properties: ['progresses.user'],
+ *      arguments: ['endpoint' => '/api/users', 'labelKey' => 'username'])
+ * ]
+ */
 class RiverAdminEntityDropdownFilter extends SearchFilter
 {
     public function __construct(private string $endpoint, private string $labelKey, ManagerRegistry $managerRegistry, ?RequestStack $requestStack, IriConverterInterface $iriConverter, PropertyAccessorInterface $propertyAccessor = null, LoggerInterface $logger = null, array $properties = null, IdentifiersExtractorInterface $identifiersExtractor = null, NameConverterInterface $nameConverter = null)

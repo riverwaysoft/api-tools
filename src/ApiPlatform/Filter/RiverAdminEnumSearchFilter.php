@@ -13,6 +13,15 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
+/**
+ * Example of usage:
+ * 
+ * #[ApiFilter(
+ *      RiverAdminEnumSearchFilter::class,
+ *      properties: ['someProperty'],
+ *      arguments: ['enum' => ChatTypeEnum::class])
+ * ]
+ */
 class RiverAdminEnumSearchFilter extends SearchFilter
 {
     public function __construct(private string $enum, ManagerRegistry $managerRegistry, ?RequestStack $requestStack, IriConverterInterface $iriConverter, PropertyAccessorInterface $propertyAccessor = null, LoggerInterface $logger = null, array $properties = null, IdentifiersExtractorInterface $identifiersExtractor = null, NameConverterInterface $nameConverter = null)
