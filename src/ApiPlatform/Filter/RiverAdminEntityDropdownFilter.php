@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
  */
 class RiverAdminEntityDropdownFilter extends SearchFilter
 {
-    public function __construct(private string $endpoint, private string $labelKey, private bool $async = false, ManagerRegistry $managerRegistry, ?RequestStack $requestStack, IriConverterInterface $iriConverter, PropertyAccessorInterface $propertyAccessor = null, LoggerInterface $logger = null, array $properties = null, IdentifiersExtractorInterface $identifiersExtractor = null, NameConverterInterface $nameConverter = null)
+    public function __construct(private string $endpoint, private string $labelKey, ManagerRegistry $managerRegistry, ?RequestStack $requestStack, IriConverterInterface $iriConverter, PropertyAccessorInterface $propertyAccessor = null, LoggerInterface $logger = null, array $properties = null, IdentifiersExtractorInterface $identifiersExtractor = null, NameConverterInterface $nameConverter = null,  private bool $async = false)
     {
         parent::__construct($managerRegistry, $requestStack, $iriConverter, $propertyAccessor, $logger, $properties, $identifiersExtractor, $nameConverter);
     }
