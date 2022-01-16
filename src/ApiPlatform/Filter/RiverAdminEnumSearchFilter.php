@@ -13,6 +13,15 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
+/**
+ * Example of usage:
+ * 
+ * #[ApiFilter(
+ *      RiverAdminEnumSearchFilter::class,
+ *      properties: ['someProperty'],
+ *      arguments: ['enum' => ChatTypeEnum::class])
+ * ]
+ */
 class RiverAdminEnumSearchFilter extends SearchFilter
 {
     public function __construct(private string $enum, ManagerRegistry $managerRegistry, ?RequestStack $requestStack, IriConverterInterface $iriConverter, PropertyAccessorInterface $propertyAccessor = null, LoggerInterface $logger = null, array $properties = null, IdentifiersExtractorInterface $identifiersExtractor = null, NameConverterInterface $nameConverter = null)
@@ -23,16 +32,12 @@ class RiverAdminEnumSearchFilter extends SearchFilter
     public function getDescription(string $resourceClass): array
     {
         $description = parent::getDescription($resourceClass);
-
         $properties = $this->getProperties();
 
-        if (count($properties) > 2) {
-            throw new \Exception('RiverAdminEnumSearchFilter - Multiple properties are not supported');
-        }
-
-        $property = array_key_first($properties);
-        if ($property && !empty($description[$property])) {
-            $description[$property]['property'] = sprintf('riveradmin_enum:%s', $this->serializeEnum($this->enum));
+        foreach ($properties as $property => $value) {
+            if ($property && !empty($description[$property])) {
+                $description[$property]['property'] = sprintf('riveradmin_enum:%s', $this->serializeEnum($this->enum));
+            }
         }
 
         return $description;

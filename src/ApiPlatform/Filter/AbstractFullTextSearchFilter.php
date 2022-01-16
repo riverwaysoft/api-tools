@@ -21,17 +21,11 @@ abstract class AbstractFullTextSearchFilter extends AbstractContextAwareFilter
         if ($property !== 'fullText') {
             return;
         }
-        if (!empty($value)) {
-            $alias = $queryBuilder->getRootAliases()[0];
-
-            if (uuid_is_valid($value)) {
-                $queryBuilder
-                    ->andWhere(sprintf('%s.id=:id', $alias))
-                    ->setParameter('id', $value);
-            } else {
-                $this->configureQuery($queryBuilder, $alias, $value);
-            }
+        if (empty($value)) {
+            return;
         }
+        $alias = $queryBuilder->getRootAliases()[0];
+        $this->configureQuery($queryBuilder, $alias, $value);
     }
 
 

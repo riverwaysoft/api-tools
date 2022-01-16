@@ -6,13 +6,13 @@ use Symfony\Component\Messenger\Stamp\StampInterface;
 
 abstract class EventSourceCollector
 {
-    protected array $messages = [];
+    protected array $_messages = [];
 
     public function popMessages(): array
     {
-        $messages = $this->messages;
+        $messages = $this->_messages;
 
-        $this->messages = [];
+        $this->_messages = [];
 
         return $messages;
     }
@@ -23,6 +23,6 @@ abstract class EventSourceCollector
      */
     public function rememberMessage(object $message, array $stamps=[])
     {
-        $this->messages[] = [$message, $stamps];
+        $this->_messages[] = [$message, $stamps];
     }
 }
