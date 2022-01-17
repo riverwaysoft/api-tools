@@ -13,7 +13,7 @@ class TelephoneObjectNormalizer implements NormalizerInterface, DenormalizerInte
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
         if ('' === $data || null === $data) {
-            return;
+            return null;
         }
         try {
             return TelephoneObject::fromString($data);
@@ -22,7 +22,7 @@ class TelephoneObjectNormalizer implements NormalizerInterface, DenormalizerInte
         }
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
         return $type === TelephoneObject::class && $data !== null;
     }
@@ -42,7 +42,7 @@ class TelephoneObjectNormalizer implements NormalizerInterface, DenormalizerInte
         return TelephoneObject::fromString($object)->__toString();
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null): bool
     {
         return $data instanceof TelephoneObject;
     }

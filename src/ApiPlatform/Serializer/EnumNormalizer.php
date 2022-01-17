@@ -14,7 +14,7 @@ class EnumNormalizer implements NormalizerInterface, DenormalizerInterface
         throw new \RuntimeException("Should not be denormalize");
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
         return false;
     }
@@ -23,7 +23,7 @@ class EnumNormalizer implements NormalizerInterface, DenormalizerInterface
      * @param mixed $object
      * @param string|null $format
      * @param array $context
-     * @return mixed
+     * @return array|string|int|float|bool|\ArrayObject|null
      */
     public function normalize($object, string $format = null, array $context = [])
     {
@@ -34,7 +34,7 @@ class EnumNormalizer implements NormalizerInterface, DenormalizerInterface
         return $object->getValue();
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null): bool
     {
         return $data instanceof Enum;
     }

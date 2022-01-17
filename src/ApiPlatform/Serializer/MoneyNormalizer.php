@@ -22,7 +22,7 @@ class MoneyNormalizer implements NormalizerInterface, DenormalizerInterface
         return new Money((int)$data['amount'], new Currency($data['currency']));
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
         return $type === Money::class && $data !== null;
     }
@@ -46,7 +46,7 @@ class MoneyNormalizer implements NormalizerInterface, DenormalizerInterface
         return array_merge($object->jsonSerialize(), ['formatted' => $formatted, 'symbol' => \Symfony\Component\Intl\Currencies::getSymbol($object->getCurrency()->getCode())]);
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null): bool
     {
         return $data instanceof Money;
     }

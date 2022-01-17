@@ -37,7 +37,8 @@
     "moneyphp/money": "^3",
     "symfony/intl": "^5.3|^6.0",
     "symfony/polyfill-uuid": "^1.23",
-    "phpdocumentor/reflection-docblock": "^5.2"
+    "phpdocumentor/reflection-docblock": "^5.2",
+    "symfony/serializer": "^5.3|6.0.1"
   },
   "require-dev": {
     "phpstan/phpstan": "0.12.91",
