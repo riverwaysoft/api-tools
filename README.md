@@ -1,5 +1,9 @@
 # Api tools
 
+## Installation
+
+`composer req riverwaysoft/api-tools`
+
 ## What's inside?
 
 ### TelephoneObject
