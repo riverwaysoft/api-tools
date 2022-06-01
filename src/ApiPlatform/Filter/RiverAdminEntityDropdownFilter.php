@@ -20,14 +20,16 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
  *      RiverAdminEntityDropdownFilter::class,
  *      properties: ['progresses.user'],
  *      arguments: [
- *          'endpoint' => '/api/users',
+ *          'endpoint' => '/api/visible_users',
+ *          // A human-readable value to display in dropdown (object property from the dropdown list)
  *          'labelKey' => 'username',
  *          // Set it to true if you want to render component that loads options from a remote source as the user types: https://react-select.com/async
  *          // Set it to false if you have a static list
- *          'async' => false,
- *          // Optional, false by default
- *          // Set it to true if you don't want to remove the automatically added iri to the filter value, e.g path?query=/api/user/{id}
- *          'removeIri' => false,
+ *          'async' => false
+ *          // An entity prefix (Iri) that API platform requires to send when using SearchFilter
+ *          // Usually the Iri prefix is not different from the endpoint property.
+ *          // But if the endpoint is custom (for example /api/visible_users), then iri prefix should still point to an entity (for example /api/users/)
+ *          'iriPrefix' => '/api/users',
  *      ])
  * ]
  */
@@ -36,6 +38,7 @@ class RiverAdminEntityDropdownFilter extends SearchFilter
     public function __construct(
         private string $endpoint,
         private string $labelKey,
+        private string $iriPrefix,
         ManagerRegistry $managerRegistry,
         ?RequestStack $requestStack,
         IriConverterInterface $iriConverter,
@@ -45,7 +48,6 @@ class RiverAdminEntityDropdownFilter extends SearchFilter
         IdentifiersExtractorInterface $identifiersExtractor = null,
         NameConverterInterface $nameConverter = null,
         private bool $async = false,
-        private bool $removeIri = false,
     )
     {
         parent::__construct($managerRegistry, $requestStack, $iriConverter, $propertyAccessor, $logger, $properties, $identifiersExtractor, $nameConverter);
@@ -62,7 +64,7 @@ class RiverAdminEntityDropdownFilter extends SearchFilter
                     'endpoint' => $this->endpoint,
                     'labelKey' => $this->labelKey,
                     'async' => $this->async,
-                    'removeIri' => $this->removeIri,
+                    'iriPrefix' => $this->iriPrefix,
                 ]));
 
             }
