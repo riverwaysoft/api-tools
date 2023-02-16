@@ -10,7 +10,7 @@
     }
   ],
   "scripts": {
-    "ci": "vendor/bin/phpstan analyse src tests",
+    "phpstan": "vendor/bin/phpstan analyse src tests",
     "tests": "vendor/bin/phpunit tests",
     "cs": "vendor/bin/php-cs-fixer fix src"
   },
@@ -41,7 +41,7 @@
     "symfony/serializer": "^5.3|6.0.1|^6.2"
   },
   "require-dev": {
-    "phpstan/phpstan": "0.12.91",
+    "phpstan/phpstan": "^1.9",
     "friendsofphp/php-cs-fixer": "^3.0",
     "doctrine/orm": "^2.9",
     "symfony/messenger": "^5.3|^6.0|^6.2",

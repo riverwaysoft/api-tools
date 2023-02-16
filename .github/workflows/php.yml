@@ -29,7 +29,7 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Run ci
-        run: composer run-script ci
+        run: composer run-script phpstan
 
       - name: Run tests
         run: composer run-script tests
