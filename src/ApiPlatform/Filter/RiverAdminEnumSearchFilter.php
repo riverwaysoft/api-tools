@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 /**
  * Example of usage:
- * 
+ *
  * #[ApiFilter(
  *      RiverAdminEnumSearchFilter::class,
  *      properties: ['someProperty'],
@@ -45,6 +45,19 @@ class RiverAdminEnumSearchFilter extends SearchFilter
 
     private function serializeEnum(string $enumFQCN): string
     {
-        return json_encode(call_user_func([$enumFQCN, 'toArray']));
+        if (method_exists($enumFQCN, 'toArray')) {
+            return json_encode(call_user_func([$enumFQCN, 'toArray']));
+        } else {
+            return json_encode($this->nativeEnumToArray($enumFQCN));
+        }
+    }
+
+    private function nativeEnumToArray(string $enumFQCN): array
+    {
+        $array = [];
+        foreach (call_user_func([$enumFQCN, 'cases']) as $case) {
+            $array[$case->value] = $case->name;
+        }
+        return $array;
     }
 }
