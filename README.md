@@ -78,6 +78,10 @@ A driver for the [phpunit-snapshot-assertions](https://github.com/spatie/phpunit
 Add the following trait to all your tests:
 
 ```php
+use Riverwaysoft\ApiTools\Testing\UnicodeIgnoreOrderJsonDriver;
+
+//
+
 public function assertMatchesJsonUnicodeSnapshot(mixed $actual): void
 {
     $this->assertMatchesSnapshot($actual, new UnicodeIgnoreOrderJsonDriver());
