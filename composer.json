@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "phpstan": "vendor/bin/phpstan analyse src tests",
-    "tests": "vendor/bin/phpunit tests",
+    "test": "vendor/bin/phpunit tests",
     "cs": "vendor/bin/php-cs-fixer fix src"
   },
   "suggest": {
