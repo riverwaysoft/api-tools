@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Riverwaysoft\ApiTools\Testing;
+
 use PHPUnit\Framework\Assert;
 use Spatie\Snapshots\Driver;
 use Spatie\Snapshots\Exceptions\CantBeSerialized;
@@ -58,9 +59,11 @@ class UnicodeIgnoreOrderJsonDriver implements Driver
 
     public function match($expected, $actual): void
     {
-        if (is_string($actual)) {
-            $actual = json_decode($actual, true, 512, JSON_THROW_ON_ERROR);
+        if (!is_string($actual)) {
+            $actual = json_encode($actual);
         }
+
+        $actual = json_decode($actual, true, 512, JSON_THROW_ON_ERROR);
         $expected = json_decode($expected, true, 512, JSON_THROW_ON_ERROR);
 
         $actual = self::sortJsonRecursively($actual);
