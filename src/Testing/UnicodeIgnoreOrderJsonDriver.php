@@ -37,34 +37,30 @@ class UnicodeIgnoreOrderJsonDriver implements Driver
 
     public static function sortJsonRecursively(mixed $array): mixed
     {
-        if (array_is_list($array)) {
-            if (count($array) > 0 && isset($array[0]) && is_array($array[0])) {
-                foreach ($array as &$v) {
-                    $v = self::sortJsonRecursively($v);
-                }
-                usort($array, fn($a, $b) => strcmp(json_encode($a), json_encode($b)));
-                return $array;
-            } else {
-                return self::sortJsonRecursively($array);
+        if (array_is_list($array) && count($array) > 0 && isset($array[0]) && is_array($array[0])) {
+            foreach ($array as &$v) {
+                $v = self::sortJsonRecursively($v);
             }
-        } else {
-            ksort($array);
-
-            foreach ($array as &$value) {
-                if (is_array($value)) {
-                    if (count($value) > 0 && isset($value[0]) && is_array($value[0])) {
-                        foreach ($value as &$v) {
-                            $v = self::sortJsonRecursively($v);
-                        }
-                        usort($value, fn($a, $b) => strcmp(json_encode($a), json_encode($b)));
-                    } else {
-                        $value = self::sortJsonRecursively($value);
-                    }
-                }
-            }
-
+            usort($array, fn($a, $b) => strcmp(json_encode($a), json_encode($b)));
             return $array;
         }
+
+        ksort($array);
+
+        foreach ($array as &$value) {
+            if (is_array($value)) {
+                if (count($value) > 0 && isset($value[0]) && is_array($value[0])) {
+                    foreach ($value as &$v) {
+                        $v = self::sortJsonRecursively($v);
+                    }
+                    usort($value, fn($a, $b) => strcmp(json_encode($a), json_encode($b)));
+                } else {
+                    $value = self::sortJsonRecursively($value);
+                }
+            }
+        }
+
+        return $array;
     }
 
     public function match($expected, $actual): void
