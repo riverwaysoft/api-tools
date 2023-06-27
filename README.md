@@ -82,7 +82,7 @@ class UserFilter
 
 class CreateUserInput {
     public function __construct(
-        public int $ageGreaterThan,
+        public int $age,
         public string $name,
     ) {
     } 
