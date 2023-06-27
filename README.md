@@ -109,6 +109,12 @@ class UserController
 }
 ```
 
+Configuration in services.yml:
+```
+  Riverwaysoft\ApiTools\InputValueResolver\:
+    resource: '../vendor/riverwaysoft/api-tools/src/InputValueResolver'
+```
+
 ### UnicodeIgnoreOrderJsonDriver
 
 A driver for the [phpunit-snapshot-assertions](https://github.com/spatie/phpunit-snapshot-assertions) library. This driver is responsible for 3 main things:
