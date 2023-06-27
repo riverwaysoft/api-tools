@@ -65,6 +65,50 @@ Configuration:
         ->tag('doctrine.event_listener', ['event' => "postLoad"]);
 ```
 
+### InputValueResolver
+A set of automatic serializers of HTTP POST body and GET query into typed objects.
+
+`#[Query]` attribute usage:
+
+```php
+class UserFilter
+{
+    public function __construct(
+        public int $ageGreaterThan,
+        public string $name,
+    ) {
+    }
+}
+
+class CreateUserInput {
+    public function __construct(
+        public int $ageGreaterThan,
+        public string $name,
+    ) {
+    } 
+}
+
+use Riverwaysoft\ApiTools\InputValueResolver\Query;
+use Riverwaysoft\ApiTools\InputValueResolver\Input;
+
+class UserController
+{
+    #[Route('/api/users', methods: ['GET'])]
+    public function getUsers(#[Query] UserFilter $userFilter)
+    {
+        // Use $userFilter for requests like
+        // /api/users?ageGreaterThan=18&name=test
+    }
+    
+    #[Route('/api/users', methods: ['POST'])]
+    public function createUser(#[Input] CreateUserInput $input)
+    {
+        // variable $input will be automatically created
+        // from the request body   
+    }
+}
+```
+
 ### UnicodeIgnoreOrderJsonDriver
 
 A driver for the [phpunit-snapshot-assertions](https://github.com/spatie/phpunit-snapshot-assertions) library. This driver is responsible for 3 main things:
