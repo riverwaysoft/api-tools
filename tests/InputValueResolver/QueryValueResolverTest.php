@@ -62,4 +62,16 @@ class QueryValueResolverTest extends TestCase
 
         $this->assertInstanceOf(UserQuery::class, $result);
     }
+
+    public function testResolveReturnsDenormalizedRawValue(): void
+    {
+        $resolver = $this->createResolver();
+        $request = new Request(['age' => 20, 'status' => 'Active']);
+        $argument = new ArgumentMetadata('user', UserQuery::class, false, false, null, false, [new Query()]);
+
+        $result = $resolver->resolve($request, $argument)[0];
+
+        $this->assertInstanceOf(UserQuery::class, $result);
+    }
+
 }
