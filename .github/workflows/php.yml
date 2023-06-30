@@ -1,15 +1,20 @@
-name: PHP Composer
+name: Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-versions: [8.1]
+    name: PHP ${{ matrix.php-versions }} Test on ubuntu latest
 
     steps:
       - uses: actions/checkout@v2
@@ -25,11 +30,15 @@ jobs:
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
+
+      - name: Check PHP
+        run: php -v
+
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Run ci
+      - name: Run phptan
         run: composer run-script phpstan
 
-      - name: Run tests
+      - name: Run test suite
         run: composer run-script test
