@@ -23,6 +23,7 @@ class UserQuery {
     public function __construct(
         public int $age,
         public UserStatus $status,
+        public bool $isActive,
     )
     {
 
@@ -55,18 +56,25 @@ class QueryValueResolverTest extends TestCase
     public function testResolveReturnsDenormalizedValue(): void
     {
         $resolver = $this->createResolver();
-        $request = new Request(['age' => 20, 'status' => UserStatus::Active->value]);
+        $queryArray = ['age' => '20', 'status' => UserStatus::Active->value, 'isActive' => false];
+        $request = new Request($queryArray);
         $argument = new ArgumentMetadata('user', UserQuery::class, false, false, null, false, [new Query()]);
 
         $result = $resolver->resolve($request, $argument)[0];
 
         $this->assertInstanceOf(UserQuery::class, $result);
+
+        $this->assertIsInt($result->age);
+        $this->assertIsBool($result->isActive);
+
+        $this->assertEquals($result->age, 20);
+        $this->assertEquals($result->isActive, false);
     }
 
     public function testResolveReturnsDenormalizedRawValue(): void
     {
         $resolver = $this->createResolver();
-        $request = new Request(['age' => 20, 'status' => 'Active']);
+        $request = new Request(['age' => 20, 'status' => 'Active', 'isActive' => false]);
         $argument = new ArgumentMetadata('user', UserQuery::class, false, false, null, false, [new Query()]);
 
         $result = $resolver->resolve($request, $argument)[0];
