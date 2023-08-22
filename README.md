@@ -119,7 +119,7 @@ Configuration in services.yml:
 
 A driver for the [phpunit-snapshot-assertions](https://github.com/spatie/phpunit-snapshot-assertions) library. This driver is responsible for 3 main things:
 
-1) Show unicode characters unescaped in json, so you'll see `Привет` instead of `\u041F\u0440\u0438\u0432\u0435\u0442`
+1) Show unicode characters unescaped in json, so you'll see "£" instead of "\u00a3"
 2) Ignore property order. Example equal json `{a: 1, b: 2}` and `{b: 2, a: 1}`
 3) Ignore order of array elements in json. Example equal json arrays `[{a: 1}, {b: 2}]` and `[{b: 2}, {a: 1}]`
 

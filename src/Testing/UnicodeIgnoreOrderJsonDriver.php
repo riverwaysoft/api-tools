@@ -11,7 +11,7 @@ use Spatie\Snapshots\Exceptions\CantBeSerialized;
 /**
  * This driver is responsible for 3 main things:
  *
- * 1) Show unicode characters unescaped in json, so you'll see Привет instead of \u041F\u0440\u0438\u0432\u0435\u0442
+ * 1) Show unicode characters unescaped in json, so you'll see "£" instead of "\u00a3"
  * 2) Ignore property order. Example equal json {a: 1, b: 2} and {b: 2, a: 1}
  * 3) Ignore order of array elements in json. Example equal json arrays [{a: 1}, {b: 2}] and [{b: 2}, {a: 1}]
  */
@@ -37,6 +37,10 @@ class UnicodeIgnoreOrderJsonDriver implements Driver
 
     public static function sortJsonRecursively(mixed $array): mixed
     {
+        if ($array === null) {
+            return null;
+        }
+
         if (array_is_list($array) && count($array) > 0 && isset($array[0]) && is_array($array[0])) {
             foreach ($array as &$v) {
                 $v = self::sortJsonRecursively($v);
